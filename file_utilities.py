@@ -1,6 +1,7 @@
 import os
 import shutil
 from time import sleep
+import send2trash
 
 
 def extension_type(event):
@@ -70,8 +71,8 @@ def move_to_new_corresponding_folder(event, path_to_new_folder):
         shutil.move(event.src_path, path_to_new_folder)
         print("moving file...")
     except:
-        sleep(5)
-        os.remove(event.src_path)
+        sleep(1)
+        send2trash.send2trash(event.src_path)
         print('File already existed in target folder')
 
         
