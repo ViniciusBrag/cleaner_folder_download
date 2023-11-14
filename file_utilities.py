@@ -72,6 +72,6 @@ def move_to_new_corresponding_folder(event, path_to_new_folder):
         if (shutil.Error, shutil.SameFileError):
             try:
                 repeat_files = os.mkdir('repeat-files')
-                os.rename(event.src_path, repeat_files)
-            except:
-                pass
+                shutil.move(event.src_path, repeat_files)
+            except (shutil.ExecError, shutil.Error):
+                print(shutil.Error)
