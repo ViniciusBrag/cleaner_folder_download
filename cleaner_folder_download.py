@@ -27,10 +27,6 @@ class Handler(FileSystemEventHandler):
 
     @staticmethod
     def on_created(event):
-        pass
-
-    @staticmethod
-    def on_modified(event):
         if os.path.isdir(event.src_path):
             return
 
@@ -39,6 +35,10 @@ class Handler(FileSystemEventHandler):
                 path_to_folder = make_folder(folder_name)
                 move_to_new_corresponding_folder(event, path_to_folder)
                 return 
+
+    @staticmethod
+    def on_modified(event):
+        pass
 
     @staticmethod
     def on_deleted(event):
