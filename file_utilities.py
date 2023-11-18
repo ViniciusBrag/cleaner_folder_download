@@ -71,8 +71,6 @@ def move_to_new_corresponding_folder(event, path_to_new_folder):
         shutil.move(event.src_path, path_to_new_folder)
         print("moving file...")
     except:
-        sleep(1)
-        send2trash.send2trash(event.src_path)
-        print('File already existed in target folder')
+        print("File exists in the folder.")
 
         
