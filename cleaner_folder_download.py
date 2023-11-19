@@ -11,7 +11,7 @@ from file_utilities import *
 
 
 class Handler(FileSystemEventHandler):
-    """ Class that monitor that target folder. 
+    """Class that monitor that target folder.
 
     Args:
         FileSystemEventHandler (Class): Class Base file system event handler.
@@ -19,19 +19,19 @@ class Handler(FileSystemEventHandler):
 
     """
 
-    #That you can override files or add extension and verify function in file_utilities.py.
+    # That you can override files or add extension and verify function in file_utilities.py.
     FILE_TYPE_FOLDERS = {
-        'code': is_code_file,
-        'text': is_text_file,
-        'pdf': is_pdf_file,
-        'audio': is_mp3_file,
-        'images': is_image_file,
-        'x86_64_bundle': is_file_bundle,
-        'videos': is_video_file,
-        'word-documents': is_doc_file,
-        'spreadsheets': is_spreadsheet_file,
-        'presentation-files': is_presentation_file,
-        'executable-files': is_executable_file,
+        "code": is_code_file,
+        "text": is_text_file,
+        "pdf": is_pdf_file,
+        "audio": is_mp3_file,
+        "images": is_image_file,
+        "x86_64_bundle": is_file_bundle,
+        "videos": is_video_file,
+        "word-documents": is_doc_file,
+        "spreadsheets": is_spreadsheet_file,
+        "presentation-files": is_presentation_file,
+        "executable-files": is_executable_file,
     }
 
     @staticmethod
@@ -40,7 +40,7 @@ class Handler(FileSystemEventHandler):
 
     @staticmethod
     def on_modified(event):
-        """ Method that monitor an event modified
+        """Method that monitor an event modified
 
         Args:
             event (_type_): args that representing event in source folder.
@@ -52,7 +52,7 @@ class Handler(FileSystemEventHandler):
             if check_function(event):
                 path_to_folder = make_folder(folder_name)
                 move_to_new_corresponding_folder(event, path_to_folder)
-                return 
+                return
 
     @staticmethod
     def on_deleted(event):
@@ -68,12 +68,12 @@ if __name__ == "__main__":
 
     file_change_handler = Handler()
 
-    #Observer thread that schedules watching directories and dispatches calls to event handlers.
-    #API Reference: https://python-watchdog.readthedocs.io/en/stable/api.html#watchdog.observers.Observer
+    # Observer thread that schedules watching directories and dispatches calls to event handlers.
+    # API Reference: https://python-watchdog.readthedocs.io/en/stable/api.html#watchdog.observers.Observer
     observer = Observer()
 
-    #Get target folder utilizing python-dotenv and change directory specified in .env
-    os.chdir(os.getenv('DIRECTORY_OF_CLEANER'))
+    # Get target folder utilizing python-dotenv and change directory specified in .env
+    os.chdir(os.getenv("DIRECTORY_OF_CLEANER"))
     observer.schedule(
         file_change_handler,
         os.getcwd(),
