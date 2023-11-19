@@ -11,6 +11,15 @@ from file_utilities import *
 
 
 class Handler(FileSystemEventHandler):
+    """ Class that monitor that target folder. 
+
+    Args:
+        FileSystemEventHandler (Class): Class Base file system event handler.
+        link: https://python-watchdog.readthedocs.io/en/stable/api.html#module-watchdog.events
+
+    """
+
+    #That you can override files or add extension and verify function in file_utilities.py.
     FILE_TYPE_FOLDERS = {
         'code': is_code_file,
         'text': is_text_file,
@@ -27,6 +36,15 @@ class Handler(FileSystemEventHandler):
 
     @staticmethod
     def on_created(event):
+        pass
+
+    @staticmethod
+    def on_modified(event):
+        """ Method that monitor an event modified
+
+        Args:
+            event (_type_): args that representing event in source folder.
+        """
         if os.path.isdir(event.src_path):
             return
 
@@ -35,10 +53,6 @@ class Handler(FileSystemEventHandler):
                 path_to_folder = make_folder(folder_name)
                 move_to_new_corresponding_folder(event, path_to_folder)
                 return 
-
-    @staticmethod
-    def on_modified(event):
-        pass
 
     @staticmethod
     def on_deleted(event):
@@ -53,18 +67,24 @@ if __name__ == "__main__":
     load_dotenv()
 
     file_change_handler = Handler()
+
+    #Observer thread that schedules watching directories and dispatches calls to event handlers.
+    #API Reference: https://python-watchdog.readthedocs.io/en/stable/api.html#watchdog.observers.Observer
     observer = Observer()
+
+    #Get target folder utilizing python-dotenv and change directory specified in .env
     os.chdir(os.getenv('DIRECTORY_OF_CLEANER'))
     observer.schedule(
         file_change_handler,
         os.getcwd(),
         recursive=False,
     )
+    # Start thread.
     observer.start()
 
     try:
         while True:
-            time.sleep(1)
+            time.sleep(2)
     except KeyboardInterrupt:
         observer.stop()
-    observer.join()
+        observer.join()
