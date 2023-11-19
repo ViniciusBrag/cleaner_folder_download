@@ -1,13 +1,10 @@
-import os 
+import os
 import shutil
 from time import sleep
 
-import send2trash
-from pathlib import Path
-
 
 def extension_type(event):
-    """ Method for verify the only extension
+    """Method for verify the only extension
 
     Args:
         event (_type_): args that representing event in source folder.
@@ -66,12 +63,12 @@ def is_executable_file(event):
 
 def make_folder(foldername):
     os.chdir(os.getenv("DIRECTORY_OF_CLEANER"))
-    folder_path = os.path.join(os.getcwd(), str(foldername))
-    if os.path.exists(folder_path):
-        print("Folders already exists, skipping creation")
+    if os.path.exists(foldername):
+        print("Folder already exists, skipping creation")
+        sleep(1)
         return os.getcwd() + os.sep + str(foldername)
     else:
-        os.mkdir(str(folder_path))
+        os.mkdir(str(foldername))
         return os.getcwd() + os.sep + str(foldername)
 
 
@@ -81,5 +78,4 @@ def move_to_new_corresponding_folder(event, path_to_new_folder):
         print("moving file...")
     except:
         print("File exists in folder")
-    else:
-        send2trash.send2trash(event.src_path)    
+        pass
