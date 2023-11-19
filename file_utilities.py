@@ -1,11 +1,17 @@
 import os
 import shutil
 from time import sleep
-import send2trash
 
 
 def extension_type(event):
+    """Method for verify the only extension
+
+    Args:
+        event (_type_): args that representing event in source folder.
+
+    """
     try:
+        # Verify after the '.' in the source path.
         return event.src_path[event.src_path.rindex(".") + 1 :]
     except ValueError:
         return
@@ -52,18 +58,18 @@ def is_code_file(event):
 
 
 def is_executable_file(event):
-    return extension_type(event) in ("exe", "msi", "deb")
+    return extension_type(event) in ("exe", "msi", "deb", "sh")
 
 
 def make_folder(foldername):
     os.chdir(os.getenv("DIRECTORY_OF_CLEANER"))
-    folder_path = os.path.join(os.getcwd(), str(foldername))
-    if os.path.exists(folder_path):
-        print("Folders already exists, skipping creation")
-        return False
+    if os.path.exists(foldername):
+        print("Folder already exists, skipping creation")
+        sleep(1)
+        return os.getcwd() + os.sep + str(foldername)
     else:
-        os.mkdir(str(folder_path))
-        return True
+        os.mkdir(str(foldername))
+        return os.getcwd() + os.sep + str(foldername)
 
 
 def move_to_new_corresponding_folder(event, path_to_new_folder):
@@ -71,6 +77,5 @@ def move_to_new_corresponding_folder(event, path_to_new_folder):
         shutil.move(event.src_path, path_to_new_folder)
         print("moving file...")
     except:
-        print("File exists in the folder.")
-
-        
+        print("File exists in folder")
+        pass
