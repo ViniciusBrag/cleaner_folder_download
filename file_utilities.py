@@ -64,20 +64,11 @@ def is_executable_file(event):
 def make_folder(foldername):
     os.chdir(os.getenv("DIRECTORY_OF_CLEANER"))
     if os.path.exists(foldername):
-<<<<<<< HEAD
-        print("Folder already exists, skipping creation")
-        sleep(1)
-=======
         print('Folder already exists, skipping creation')
->>>>>>> 00d8616 ([OK] test passed is correct script)
         return os.getcwd() + os.sep + str(foldername)
     else:
         os.mkdir(str(foldername))
         return os.getcwd() + os.sep + str(foldername)
-<<<<<<< HEAD
-=======
-
->>>>>>> 00d8616 ([OK] test passed is correct script)
 
 
 def move_to_new_corresponding_folder(event, path_to_new_folder):
@@ -85,12 +76,7 @@ def move_to_new_corresponding_folder(event, path_to_new_folder):
         shutil.move(event.src_path, path_to_new_folder)
         print("moving file...")
     except:
-<<<<<<< HEAD
-        print("File exists in folder")
-        pass
-=======
         print("File exists in the folder.")
         pass
 
         
->>>>>>> 00d8616 ([OK] test passed is correct script)
