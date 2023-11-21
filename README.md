@@ -54,10 +54,45 @@ python -u cleaner_folder_download.py
 
 * **Option**
 
-  Add this script to run in background in machine. In Linux it's necessary add script in systemd. But whats systemd?
-  [Systemd](https://e-tinet.com/systemd/)
+  Add this script to run in background in machine. In Linux it's necessary add script in systemd. If do not know systemd, this link [Systemd](https://e-tinet.com/systemd/) show little about it.
    
 
+  **_Note_**:
+  in this part, reading above link and know about systemd and dependecy to distribution of *_Linux_* path to systemd or version can be different. So search and confirm both information first.
+
+  For distribution based in *_Debian_* or *_Ubuntu_* need add script in services of **systemd**. Create and edit this path in system **_/etc/systemd/system/_** in below an example in my system, refers in my computer please edit according to directory and computer. In this article explain well [article](https://embarcados.com.br/systemd-adicionando-scripts-na-inicializacao-do-linux/).
+
+
+  * Create file with some edit text, in this case using *_nano_*. 
+   ![Alt text](<images/systemd.png>)
+    image create in path cited above with name **'cleaner_folder_download.service'** and add with poetry to run script, but your run script with python normally. Script have *_shebang_* to use with python of own machine or virtualenv
+
+
+ * **Windows**
+
+   In project exists pyinstaller to create executable. This, can be add in background also.
+
+   * [Pyinstaller](https://pyinstaller.org/en/stable/)
+
+   Run command terminal windows.
+   ```
+   pyinstaller --onefile --noconsole .\cleaner_folder_download.py
+   ```
+   in the folder, after run command above exists a folder *dist* create shortcut executable and move executable file to startup windows.
+   type shell windows:
+   ```
+   shell:Startup
+   ```
+   add shortcut executable windows.Done script run background computer.
+
+
+   
+
+    
+
+
+  
+      
    
 
 
