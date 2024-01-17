@@ -30,7 +30,7 @@ def is_pdf_file(event):
 
 
 def is_mp3_file(event):
-    return extension_type(event) == "mp3"
+    return extension_type(event) in ("mp3", "wav")
 
 
 def is_image_file(event):
